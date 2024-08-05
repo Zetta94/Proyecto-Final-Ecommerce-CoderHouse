@@ -36,7 +36,8 @@ const initializePassport = () => {
                     age,
                     password: createHash(password),
                     role: isAdmin ? 'admin' : 'usuario',
-                    cart: []
+                    cart: [],
+                    premium: false
                 }
                 let result = await MODEL_USER.create(newUser)
                 const existsCart = await cartManager.addCart(result._id)
@@ -72,7 +73,6 @@ const initializePassport = () => {
         }
     ))
     
-
 
     // Serialización del usuario
     passport.serializeUser((user, done) => {

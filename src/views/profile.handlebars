@@ -1,4 +1,4 @@
-<div class="container card">
+<div class="container">
     <!--Navbar-->
     <nav class="navbar navbar-expand-lg bg-body-tertiary ">
         <div class="container-fluid">
@@ -20,14 +20,85 @@
             </div>
         </div>
     </nav>
-
-    <h2>Perfil</h2>
-    <p>Nombre: {{user.first_name}} {{user.last_name}}</p>
-    <p>Email: {{user.email}}</p>
-    <p>Edad: {{user.age}}</p>
-    <p>Rol: {{user.role}}</p>
-    <p>Cart: {{user.cart}}</p>
-    <form action="/api/sessions/logout" method="POST">
-        <button type="submit">Cerrar Sesión</button>
-    </form>
+    <div class="profile-container">
+        <h2>Profile {{user.first_name}} {{user.last_name}}</h2>
+        <p><strong>Email:</strong> {{user.email}}</p>
+        <p><strong>Age:</strong> {{user.age}}</p>
+        <p><strong>Rol:</strong> {{user.role}}</p>
+        <p><strong>Cart ID:</strong> {{user.cart}}</p>
+        {{#if user.premium}}
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
+                <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
+                <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
+                </svg>
+                <p><strong>USUARIO PREMIUM</strong></p>
+            </div>
+        {{else}}
+            <div >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ban" viewBox="0 0 16 16">
+                <path d="M15 8a6.97 6.97 0 0 0-1.71-4.584l-9.874 9.875A7 7 0 0 0 15 8M2.71 12.584l9.874-9.875a7 7 0 0 0-9.874 9.874ZM16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0"/>
+                </svg>
+                <p><strong>USUARIO NO PREMIUM</strong></p>
+            </div>
+        {{/if}}
+        <form action="/api/sessions/logout" method="POST">
+            <button type="submit" class="primary-button">Logout</button>
+        </form>
+    </div>
+    
 </div>
+
+
+ <style>
+    .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .profile-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .profile-container h2 {
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .profile-container p {
+        margin: 10px 0;
+        font-size: 16px;
+        color: #555;
+    }
+
+    .profile-container p strong {
+        color: #333;
+    }
+
+    .primary-button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        text-transform: uppercase;
+    }
+
+    .primary-button:hover {
+        background-color: #0056b3;
+    }
+    
+</style>

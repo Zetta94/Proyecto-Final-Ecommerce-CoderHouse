@@ -1,16 +1,22 @@
 import { Router } from "express";
 import {
     getAProduct,
-    getProducts
+    getProducts,
+    allProducts
 } from "../../controllers/products.controller.js"
 import { isAuthenticated}  from "../../middlewares/auth.js"
 
 const router = Router();
 
-// [GET] 🌐/product/:pid
+// [GET] 🌐/products/productsAdminPanel
+router.get('/productsPanel', allProducts)
+
+// [GET] 🌐/products/:pid
 router.get("/:pid", getAProduct)
 
-// [GET] 🌐/product
+// [GET] 🌐/products
 router.get('/',isAuthenticated, getProducts)
+
+
 
 export default router

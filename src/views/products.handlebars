@@ -18,6 +18,12 @@
                         <h4>Welcome {{user.first_name}} {{user.last_name}}</h4>
                         <h6>({{user.role}})</h6>
                         <a href="http://localhost:8080/profile" class="btn btn-primary">PROFILE</a>
+                        {{#if user.premium}}
+                            <a href="http://localhost:8080/users/createProduct" class="btn btn-primary">CREATE PRODUCTS</a>
+                        {{/if}}
+                        {{#ifEquals user.email "admincoder@coder.com"}}
+                            <a href="http://localhost:8080/users/panelAdmin" class="btn btn-primary">PANEL ADMIN</a>
+                        {{/ifEquals}}
                     </div>
                 </div>
             </div>
@@ -71,7 +77,7 @@
                         <div class="product card p-2 m-4 col-sm-5">
                             <h5 class="card-text">{{title}}</h5>                            
                             <img src="{{thumbnail}}" class="card-img-top" alt="Product Image">
-                            <a href="/product/{{_id}}" class="m-3">
+                            <a href="/products/{{_id}}" class="m-3">
                                 <button class="btn-secondary" > + Details</button>
                             </a>
                             <div class="card-body">

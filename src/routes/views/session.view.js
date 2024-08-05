@@ -15,7 +15,7 @@ router.get('/register', isNotAuthenticated, (req, res) => {
 
 router.get('/profile', isAuthenticated, (req, res) => {
     req.logger.http('Route GET /profile')
-    req.logger.info(req.session.user)
+    //req.logger.info(req.session.user)
     res.render('profile', { user: req.session.user })
 })
 

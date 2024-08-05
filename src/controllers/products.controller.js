@@ -3,6 +3,36 @@ import productModel from "../dao/models/product.model.js"
 
 const manager = new ProductManager()
 
+export const allProducts = async (req, res) => {
+    req.logger.http('Route GET products/productsAdminPanel');
+    try {
+        const products = await manager.getAllProducts();
+        res.render('superEditProducts', { user: req.session.user, products });
+    } catch (error) {
+        req.logger.error("Productos no encontrados");
+        res.status(404).json({ 'error': 'Products not found' });
+    }
+};
+
+export const createProduct = async (req, res) => {
+    req.logger.http('Route POST: /api/products');
+    try { 
+        const { title, description, price, code, stock, category, thumbnail, email } = req.body;
+
+        if (!title || !description || !price || !code || !stock || !category || !thumbnail || !email) {
+            return res.status(400).json({ status: "error", message: "Todos los campos son obligatorios" });
+        }
+
+        const response = await manager.newProduct({ title, description, price, code, stock, category, thumbnail }, email);
+        
+        req.logger.info("Producto creado con éxito: ", response);
+        res.status(200).json({ status: "success" });
+    } catch (error) {
+        req.logger.error("Error al crear el producto: ", error.message);
+        res.status(500).json({ status: "error", message: error.message });
+    }
+};
+
 export const getAProduct = async (req,res)=>{
     try{
         const {pid}= req.params

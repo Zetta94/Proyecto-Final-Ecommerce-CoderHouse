@@ -1,0 +1,117 @@
+<div class="main-container">
+    <div class="container">
+        <h1>ADMIN PANEL : PRODUCTS</h1>
+        <a href="http://localhost:8080/users/createProduct" class="btn btn-primary">CREATE PRODUCTS</a>
+    </div>
+    
+    {{#each products}}
+    <div class="product-container">
+        <div class="product-info">
+            <h2>{{this.title}}</h2>
+            <p>Precio: ${{this.price}}</p> 
+            <p>Código: {{this.code}}</p>
+            <p>Stock: {{this.stock}}</p>
+            {{#if this.owner}}
+                <p>Owner: {{this.owner}}</p>
+            {{/if}}
+        </div>
+        <div class="product-buttons">
+            <a href="/edit/{{this._id}}" class="button edit">Editar</a>
+            <a href="/delete/{{this._id}}" class="button delete">Eliminar</a>
+        </div>
+    </div>
+    {{/each}}
+</div>
+
+<style>
+    
+    .container {
+            text-align: center;
+            padding: 90px;
+        }
+
+    .main-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+    }
+
+    /* Estilo para el título */
+    .main-container h1 {
+        text-align: center;
+        color: #333;
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+
+    /* Estilo para cada contenedor de producto */
+    .product-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 15px;
+        padding: 15px;
+        transition: background-color 0.3s;
+    }
+
+    /* Efecto de hover para el contenedor de producto */
+    .product-container:hover {
+        background-color: #f1f1f1;
+    }
+
+    /* Estilo para la información del producto */
+    .product-info {
+        flex: 1;
+    }
+
+    .product-info h2 {
+        margin: 0;
+        font-size: 1.5rem;
+        color: #333;
+    }
+
+    .product-info p {
+        margin: 5px 0;
+        color: #666;
+    }
+
+    /* Estilo para los botones */
+    .product-buttons {
+        display: flex;
+        gap: 10px;
+    }
+
+    .button {
+        display: inline-block;
+        padding: 10px 15px;
+        border-radius: 4px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 0.875rem;
+        color: #fff;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .button.edit {
+        background-color: #007bff;
+    }
+
+    .button.edit:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+    }
+
+    .button.delete {
+        background-color: #dc3545;
+    }
+
+    .button.delete:hover {
+        background-color: #c82333;
+        transform: scale(1.05);
+    }
+
+</style>

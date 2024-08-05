@@ -1,0 +1,133 @@
+ <div class="container">
+        <button id="backButton" data-role="{{user.role}}" class="button">Return</button>
+        <h2>Crear Producto</h2>
+        <form id="productForm" action="/api/products" method="POST">
+            <label for="title">Título:</label>
+            <input type="text" id="title" name="title" required>
+
+            <label for="description">Descripción:</label>
+            <input type="text" id="description" name="description" required>
+
+            <label for="price">Precio:</label>
+            <input type="number" id="price" name="price" step="0.01" required>
+
+            <label for="code">Código:</label>
+            <input type="text" id="code" name="code" required>
+
+            <label for="stock">Stock:</label>
+            <input type="number" id="stock" name="stock" required>
+
+            <label for="category">Categoría:</label>
+            <input type="text" id="category" name="category" required>
+
+            <label for="thumbnail">URL del Thumbnail:</label>
+            <input type="text" id="thumbnail" name="thumbnail" required>
+
+            <input type="hidden" id="email" name="email" value="{{user.email}}">
+
+            <button type="submit">Crear Producto</button>
+        </form>
+
+        <div id="message" class="message" style="display:none;"></div>
+    </div>
+
+    <script>
+        document.getElementById('productForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+            const messageDiv = document.getElementById('message');
+
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                if (response.ok) {
+                    messageDiv.className = 'message success';
+                    messageDiv.textContent = 'Producto creado con éxito.';
+                } else {
+                    messageDiv.className = 'message error';
+                    messageDiv.textContent = 'Error al crear el producto: ' + result.message;
+                }
+            } catch (error) {
+                messageDiv.className = 'message error';
+                messageDiv.textContent = 'Error al crear el producto: ' + error.message;
+            }
+
+            messageDiv.style.display = 'block';
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const backButton = document.getElementById('backButton');
+            const userRole = backButton.getAttribute('data-role');
+
+            backButton.addEventListener('click', () => {
+                if (userRole === 'admin') {
+                    window.location.href = 'http://localhost:8080/products/productsPanel';
+                } else if (userRole === 'usuario') {
+                    window.location.href = 'http://localhost:8080/products';
+                } else {
+                    console.error('Rol de usuario no válido');
+                }
+            });
+        });
+
+    </script>
+
+ <style>
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .message {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        form input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        form button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #0056b3;
+        }
+    </style>

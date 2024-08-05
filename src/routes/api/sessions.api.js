@@ -25,7 +25,8 @@ router.post('/login', passport.authenticate('login', {failureRedirect: '/login'}
             email: req.user.email,
             age: req.user.age,
             role: req.user.role,
-            cart: req.user.cart
+            cart: req.user.cart,
+            premium:req.user.premium
         }
         req.logger.info(req.session.user)
         res.redirect('/products')   

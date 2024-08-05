@@ -1,6 +1,9 @@
 import { Router } from "express";
+import { createProduct } from "../../controllers/products.controller.js";
 
 const router = Router();
+//[POST] 🌐/api/product
+router.post("/",createProduct)
 
 // [GET] 🌐/api/product
 // router.post('/', async (req, res) => {
