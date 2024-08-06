@@ -1,5 +1,6 @@
 import { Router } from "express"
 import UserManager from "../../controllers/users.controller.js"
+import {changePremium} from "../../controllers/users.controller.js"
 
 const manager = new UserManager()
 
@@ -24,13 +25,7 @@ router.post('/restPass', async (req, res) => {
     }
 })
 
-router.post('/premium/:uid', (req, res) => {
-    const { uid } = req.params
-    try{
-
-    }catch(error){
-        req.logger.error('Error al cambiar tipo de usuario')
-    }
-})
+//[DELETE] 🌐/api/users/premium/:uid
+router.put('/premium/:uid',changePremium)
 
 export default router

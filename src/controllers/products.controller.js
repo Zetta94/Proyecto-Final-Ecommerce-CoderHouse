@@ -45,6 +45,18 @@ export const getAProduct = async (req,res)=>{
     }
 }
 
+export const deleteProduct = async (req,res)=>{
+    req.logger.http('Route DELETE: /api/products/:pid')
+    try{
+        const {pid} = req.params
+        const response = await manager.deleteAProduct(pid)
+        res.status(200).json({ status: "success" });
+    }catch(error){
+        req.logger.error("Producto no encontrado")
+        res.status(500).json({ status: "error", message: error.message })
+    }
+}
+
 export const getProducts = async (req, res) => {
     let { limit = 4, page = 1, sort, query } = req.query
     limit = parseInt(limit)

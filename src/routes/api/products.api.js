@@ -1,23 +1,17 @@
-import { Router } from "express";
-import { createProduct } from "../../controllers/products.controller.js";
+import { Router } from "express"
+import { 
+        createProduct,
+        deleteProduct
+ } from "../../controllers/products.controller.js"
+
+ import { isAuthenticated}  from "../../middlewares/auth.js"
 
 const router = Router();
 //[POST] 🌐/api/product
-router.post("/",createProduct)
+router.post("/",isAuthenticated,createProduct)
 
-// [GET] 🌐/api/product
-// router.post('/', async (req, res) => {
-//     try{
-//         let { title, price, available } = req.body
-//         if (!title || !price) {
-//             res.send({ status: "error", error: "Faltan parametros" })
-//         }
-//         let result = await productModel.create({ title, price, available })
-//         res.send({ result: "success", payload: result })
-//     }catch(error){
-//         console.log(error)
-//     }
-// })
+//[DELETE] 🌐/api/products/:pid
+router.delete("/:pid",isAuthenticated,deleteProduct)
 
 
 // *[PUT] 🌐/api/product/:uid

@@ -45,5 +45,17 @@ export default class ProductManager{
     
     }
 
+    async deleteAProduct(pid){
+        try{
+            const id = pid
+            const result = await productModel.deleteOne({ _id: id })
+            if (result.deletedCount === true) {
+                return { code: 200, status: 'Product deleted' }
+            }
+            return { code: 404, status: 'Product not found' }
+        }catch(error){
+            throw error
+        }
+    }
 
 }

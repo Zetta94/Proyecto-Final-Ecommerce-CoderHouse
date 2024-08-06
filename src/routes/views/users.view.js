@@ -1,5 +1,7 @@
 import {Router} from "express"
+import {getUsers} from "../../controllers/users.controller.js"
 import {isAuthenticated} from '../../middlewares/auth.js'
+
 
 const router = Router()
 
@@ -20,6 +22,7 @@ router.get('/createProduct',(req,res)=>{
     }
 })
 
+// [GET] 🌐/users/panelAdmin
 router.get('/panelAdmin',isAuthenticated, (req, res) => {
     req.logger.http('Route GET /users/panelAdmin')
 
@@ -38,10 +41,9 @@ router.get('/panelAdmin',isAuthenticated, (req, res) => {
     }
 })
 
-router.get('/usersAdminPanel',isAuthenticated, (req, res) => {
-    req.logger.http('Route GET users/usersAdminPanel')
-    res.render('superEditUsers',{ user: req.session.user })
-})
+
+// [GET] 🌐/users/usersAdminPanel
+router.get('/usersAdminPanel',isAuthenticated, getUsers)
  
 
 
