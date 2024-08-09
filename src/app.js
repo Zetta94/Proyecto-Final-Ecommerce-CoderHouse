@@ -8,6 +8,9 @@ import utils from './utils.js'
 const {__dirname} = utils
 import handlebars from 'express-handlebars'
 import exphbs from 'express-handlebars'
+//Swagger
+import swaggerJsDoc from 'swagger-jsdoc'
+import SwaggerUiExpress from 'swagger-ui-express'
 //MongoStore
 import MongoStore from 'connect-mongo'
 //Mongoose
@@ -67,12 +70,28 @@ app.use(session({
 }))
 
 
+
 //Inicializo Passport
 initializePassport()
 app.use(passport.initialize())
 app.use(passport.session())
 
 app.use(express.static(__dirname + '/public'))
+
+
+//Inicializo Swagger
+const swaggerOptions = {
+    definition:{
+        openapi: "3.0.1",
+        info:{
+            title: "Documentation",
+            description: "API Ecommerce"
+        },
+    },
+    apis: [`src/docs/**/*.yaml`]
+}
+const specs = swaggerJsDoc(swaggerOptions)
+app.use("/apidocs",SwaggerUiExpress.serve,SwaggerUiExpress.setup(specs))
 
 //Rutas
 app.use(router)

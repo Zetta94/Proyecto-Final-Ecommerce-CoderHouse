@@ -1,0 +1,506 @@
+paths:
+  /carts/{cid}:
+    get:
+      summary: Obtiene un carrito específico por su ID
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: ID del carrito a obtener
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Carrito encontrado exitosamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cid:
+                    type: string
+                    description: ID del carrito
+                  cartProducts:
+                    type: array
+                    description: Lista de productos en el carrito
+                    items:
+                      type: object
+                      properties:
+                        product:
+                          type: string
+                          description: ID del producto
+                        quantity:
+                          type: number
+                          description: Cantidad del producto
+              examples:
+                ejemploCarrito:
+                  summary: Ejemplo de un carrito
+                  value:
+                    cid: "64b7f63a2f1a2c7b30a9f001"
+                    cartProducts:
+                      - product: "64b7f63a2f1a2c7b30a9f002"
+                        quantity: 2
+                      - product: "64b7f63a2f1a2c7b30a9f003"
+                        quantity: 1
+        "404":
+          description: Carrito no encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Mensaje de error
+              examples:
+                errorCarritoNoEncontrado:
+                  summary: Error al obtener carrito
+                  value:
+                    error: "Cart not found"
+        "500":
+          description: Error interno del servidor
+
+  /api/carts/{cid}:
+      get:
+        summary: Obtiene los productos de un carrito específico por su ID
+        tags:
+          - Carts
+        parameters:
+          - name: cid
+            in: path
+            required: true
+            description: ID del carrito del cual obtener los productos
+            schema:
+              type: string
+        responses:
+          "200":
+            description: Productos obtenidos exitosamente del carrito
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    status:
+                      type: string
+                      description: Estado de la solicitud
+                    payload:
+                      type: array
+                      description: Lista de productos en el carrito
+                      items:
+                        type: object
+                        properties:
+                          product:
+                            type: string
+                            description: ID del producto
+                          quantity:
+                            type: number
+                            description: Cantidad del producto
+                examples:
+                  ejemploProductosCarrito:
+                    summary: Ejemplo de productos en un carrito
+                    value:
+                      status: "success"
+                      payload:
+                        - product: "64b7f63a2f1a2c7b30a9f002"
+                          quantity: 2
+                        - product: "64b7f63a2f1a2c7b30a9f003"
+                          quantity: 1
+          "404":
+            description: Carrito no encontrado
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    error:
+                      type: string
+                      description: Mensaje de error
+                examples:
+                  errorCarritoNoEncontrado:
+                    summary: Error al obtener carrito
+                    value:
+                      error: "Cart not found"
+          "500":
+            description: Error interno del servidor
+      put:
+            summary: Actualiza los productos de un carrito específico por su ID
+            tags:
+              - Carts
+            parameters:
+              - name: cid
+                in: path
+                required: true
+                description: ID del carrito a actualizar
+                schema:
+                  type: string
+            requestBody:
+              required: true
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      products:
+                        type: array
+                        description: Lista de productos para actualizar en el carrito
+                        items:
+                          type: object
+                          properties:
+                            product:
+                              type: string
+                              description: ID del producto
+                            quantity:
+                              type: number
+                              description: Cantidad del producto
+                    examples:
+                      ejemploActualizacionProductos:
+                        summary: Ejemplo de actualización de productos en un carrito
+                        value:
+                          products:
+                            - product: "64b7f63a2f1a2c7b30a9f002"
+                              quantity: 3
+                            - product: "64b7f63a2f1a2c7b30a9f003"
+                              quantity: 2
+            responses:
+              "200":
+                description: Productos del carrito actualizados exitosamente
+                content:
+                  application/json:
+                    schema:
+                      type: object
+                      properties:
+                        status:
+                          type: string
+                          description: Estado de la solicitud
+                    examples:
+                      ejemploProductosActualizados:
+                        summary: Ejemplo de respuesta tras la actualización
+                        value:
+                          status: "success"
+              "500":
+                description: Error interno del servidor al actualizar los productos del carrito
+                content:
+                  application/json:
+                    schema:
+                      type: object
+                      properties:
+                        error:
+                          type: string
+                          description: Mensaje de error
+                    examples:
+                      errorActualizacionProductos:
+                        summary: Error al actualizar productos
+                        value:
+                          error: "Server error: Error message"
+
+  /api/carts/{cid}/total:
+    get:
+      summary: Obtiene el total del carrito específico por su ID
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: ID del carrito del cual calcular el total
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Total calculado exitosamente para el carrito
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Estado de la solicitud
+                  total:
+                    type: number
+                    description: Monto total del carrito
+              examples:
+                ejemploTotalCarrito:
+                  summary: Ejemplo de total del carrito
+                  value:
+                    status: "success"
+                    total: 150.00
+        "500":
+          description: Error interno del servidor al calcular el total
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Mensaje de error
+              examples:
+                errorCalculoTotal:
+                  summary: Error al calcular el total
+                  value:
+                    error: "Server error: Error message"
+
+  /api/carts:
+    post:
+      summary: Crea un nuevo carrito
+      tags:
+        - Carts
+      responses:
+        "201":
+          description: Carrito creado exitosamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Estado de la solicitud
+              examples:
+                ejemploCarritoCreado:
+                  summary: Ejemplo de carrito creado
+                  value:
+                    status: "success"
+        "500":
+          description: Error interno del servidor al crear el carrito
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Mensaje de error
+              examples:
+                errorCreacionCarrito:
+                  summary: Error al crear el carrito
+                  value:
+                    error: "Server error: Error message"
+
+  /api/carts/{cid}/product/{pid}:
+    post:
+      summary: Añade un producto al carrito específico por su ID
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: ID del carrito al cual agregar el producto
+          schema:
+            type: string
+        - name: pid
+          in: path
+          required: true
+          description: ID del producto a agregar al carrito
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Producto añadido exitosamente al carrito
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Estado de la solicitud
+              examples:
+                ejemploProductoAñadido:
+                  summary: Ejemplo de producto añadido
+                  value:
+                    status: "success"
+        "500":
+          description: Error interno del servidor al añadir el producto al carrito
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Mensaje de error
+              examples:
+                errorAñadirProducto:
+                  summary: Error al añadir producto
+                  value:
+                    error: "Server error: Error message"
+    
+/api/carts/{cid}/product/{pid}:
+  put:
+    summary: Actualiza la cantidad de un producto en un carrito específico por su ID
+    tags:
+      - Carts
+    parameters:
+      - name: cid
+        in: path
+        required: true
+        description: ID del carrito donde se actualiza el producto
+        schema:
+          type: string
+      - name: pid
+        in: path
+        required: true
+        description: ID del producto cuya cantidad se actualizará
+        schema:
+          type: string
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              quantity:
+                type: number
+                description: Nueva cantidad del producto
+            examples:
+              ejemploActualizacionCantidad:
+                summary: Ejemplo de actualización de cantidad del producto
+                value:
+                  quantity: 5
+    responses:
+      "200":
+        description: Cantidad del producto actualizada exitosamente en el carrito
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  description: Estado de la solicitud
+            examples:
+              ejemploCantidadActualizada:
+                summary: Ejemplo de respuesta tras la actualización
+                value:
+                  status: "success"
+      "500":
+        description: Error interno del servidor al actualizar la cantidad del producto
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  description: Mensaje de error
+            examples:
+              errorActualizacionCantidad:
+                summary: Error al actualizar cantidad
+                value:
+                  error: "Server error: Error message"
+  delete:
+    summary: Elimina un producto específico de un carrito por su ID
+    tags:
+      - Carts
+    parameters:
+      - name: cid
+        in: path
+        required: true
+        description: ID del carrito del que se eliminará el producto
+        schema:
+          type: string
+      - name: pid
+        in: path
+        required: true
+        description: ID del producto a eliminar del carrito
+        schema:
+          type: string
+    responses:
+      "200":
+        description: Producto eliminado exitosamente del carrito
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+              examples:
+                ejemploProductoEliminado:
+                  summary: Ejemplo de respuesta tras eliminar el producto
+                  value:
+                    status: "success"
+      "500":
+        description: Error interno del servidor al eliminar el producto
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+              examples:
+                errorEliminacionProducto:
+                  summary: Error al eliminar el producto
+                  value:
+                    error: "Server error: Error message"
+
+/api/carts/{cid}:
+  delete:
+    summary: Elimina todos los productos de un carrito específico por su ID
+    tags:
+      - Carts
+    parameters:
+      - name: cid
+        in: path
+        required: true
+        description: ID del carrito del que se eliminarán todos los productos
+        schema:
+          type: string
+    responses:
+      "200":
+        description: Todos los productos eliminados exitosamente del carrito
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+              examples:
+                ejemploEliminacionTotal:
+                  summary: Ejemplo de respuesta tras eliminar todos los productos
+                  value:
+                    status: "success"
+      "500":
+        description: Error interno del servidor al eliminar todos los productos
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+              examples:
+                errorEliminacionTotal:
+                  summary: Error al eliminar todos los productos
+                  value:
+                    error: "Server error: Error message"
+
+
+components:
+  schemas:
+    Cart:
+      type: object
+      properties:
+        user:
+          type: string
+          description: ID del usuario propietario del carrito
+        products:
+          type: array
+          description: Lista de productos en el carrito
+          items:
+            type: object
+            properties:
+              product:
+                type: string
+                description: ID del producto
+              quantity:
+                type: number
+                description: Cantidad del producto

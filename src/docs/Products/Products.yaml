@@ -1,0 +1,208 @@
+paths:
+  /products:
+    get:
+      summary: Obtiene productos con autenticación
+      tags:
+        - Products
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Listado de productos obtenidos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+              examples:
+                ejemploProductos:
+                  summary: Ejemplo de productos autenticados
+                  value:
+                    - title: "Smartphone XYZ"
+                      description: "Un smartphone de última generación con cámara de 48MP."
+                      price: 599.99
+                      status: true
+                      code: "SPXYZ123"
+                      stock: 50
+                      category: "Electrónica"
+                      thumbnail: "https://example.com/images/smartphone_xyz.jpg"
+                      owner: "TiendaXYZ"
+        "401":
+          description: No autorizado
+        "500":
+          description: Error interno del servidor
+
+  /products/{pid}:
+    get:
+      summary: Obtiene un producto por su ID
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: ID del producto a obtener
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Producto obtenido exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+              examples:
+                ejemploProducto:
+                  summary: Ejemplo de un producto
+                  value:
+                    title: "Smartphone XYZ"
+                    description: "Un smartphone de última generación con cámara de 48MP."
+                    price: 599.99
+                    status: true
+                    code: "SPXYZ123"
+                    stock: 50
+                    category: "Electrónica"
+                    thumbnail: "https://example.com/images/smartphone_xyz.jpg"
+                    owner: "TiendaXYZ"
+        "400":
+          description: Solicitud inválida
+        "404":
+          description: Producto no encontrado
+        "500":
+          description: Error interno del servidor
+
+  /productsPanel:
+    get:
+      summary: Obtiene todos los productos
+      tags:
+        - Products
+      responses:
+        "200":
+          description: Listado de todos los productos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+              examples:
+                ejemploProductos:
+                  summary: Ejemplo de productos
+                  value:
+                    - title: "Smartphone XYZ"
+                      description: "Un smartphone de última generación con cámara de 48MP."
+                      price: 599.99
+                      status: true
+                      code: "SPXYZ123"
+                      stock: 50
+                      category: "Electrónica"
+                      thumbnail: "https://example.com/images/smartphone_xyz.jpg"
+                      owner: "TiendaXYZ"
+                    - title: "Laptop ABC"
+                      description: "Laptop con procesador i7 y 16GB de RAM."
+                      price: 999.99
+                      status: true
+                      code: "LABC456"
+                      stock: 30
+                      category: "Computadoras"
+                      thumbnail: "https://example.com/images/laptop_abc.jpg"
+                      owner: "TiendaABC"
+        "500":
+          description: Error interno del servidor
+
+  /api/products:
+      post:
+        summary: Crea un nuevo producto
+        tags:
+          - Products
+        security:
+          - bearerAuth: []
+        requestBody:
+          description: Datos necesarios para crear un nuevo producto
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        responses:
+          "201":
+            description: Producto creado exitosamente
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Product"
+          "400":
+            description: Solicitud inválida
+          "401":
+            description: No autorizado
+          "500":
+            description: Error interno del servidor
+
+  /api/products/{pid}:
+    delete:
+      summary: Elimina un producto por su ID
+      tags:
+        - Products
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: ID del producto a eliminar
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Producto eliminado exitosamente
+        "400":
+          description: Solicitud inválida
+        "401":
+          description: No autorizado
+        "404":
+          description: Producto no encontrado
+        "500":
+          description: Error interno del servidor
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        title:
+          type: string
+          maxLength: 100
+          description: Título del producto
+        description:
+          type: string
+          maxLength: 300
+          description: Descripción del producto
+        price:
+          type: number
+          description: Precio del producto
+        status:
+          type: boolean
+          description: Estado del producto (disponible o no)
+        code:
+          type: string
+          description: Código del producto
+        stock:
+          type: number
+          description: Cantidad en stock
+        category:
+          type: string
+          maxLength: 100
+          description: Categoría del producto
+        thumbnail:
+          type: string
+          description: URL de la imagen en miniatura del producto
+        owner:
+          type: string
+          maxLength: 100
+          description: Propietario del producto
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
