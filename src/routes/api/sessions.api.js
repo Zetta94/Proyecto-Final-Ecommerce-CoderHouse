@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import passport from 'passport'
 const router = Router()
+import MODEL_USER from '../../dao/models/user.model.js'
 
 router.post('/register', passport.authenticate('register', {
     successRedirect: '/login',
@@ -17,8 +18,9 @@ router.post('/login', passport.authenticate('login', {failureRedirect: '/login'}
         req.logger.fatal('Incomplete data')
         return res.status(400).send({status: "error", error: "Incomplete data"})
     }
-
     try{
+
+        await MODEL_USER.findByIdAndUpdate(req.user._id, { last_connection: new Date() });
         req.session.user = {
             first_name: req.user.first_name,
             last_name: req.user.last_name,
@@ -26,9 +28,11 @@ router.post('/login', passport.authenticate('login', {failureRedirect: '/login'}
             age: req.user.age,
             role: req.user.role,
             cart: req.user.cart,
-            premium:req.user.premium
+            premium:req.user.premium,
+            last_connection: new Date()
         }
-        req.logger.info(req.session.user)
+
+        req.logger.info("Success ",req.session.user)
         res.redirect('/products')   
     }catch(error){
         req.logger.error('Authenticate Error')
@@ -36,20 +40,45 @@ router.post('/login', passport.authenticate('login', {failureRedirect: '/login'}
     }
 })
 
-router.get('/github',passport.authenticate('github',{ scope: ['user:email']}), async(req,res)=>{})
+// router.get('/github',passport.authenticate('github',{ scope: ['user:email']}), async(req,res)=>{})
 
-router.get('/githubcallback',passport.authenticate('github',{failureRedirect:'/login'}),async(req,res)=>{
-    req.session.user = req.user
-    res.redirect('/products')
-})
+// router.get('/githubcallback',passport.authenticate('github',{failureRedirect:'/login'}),async(req,res)=>{
+//     req.session.user = req.user
+//     res.redirect('/products')
+// })
 
-router.post('/logout', (req, res) => {
-    req.session.destroy((err) => {
-        req.logger.info('Session end')
-        if (err) return res.status(500).send('Error al cerrar sesión')
-        res.redirect('/login')
-    })
-})
+router.post('/logout', async (req, res) => {
+    try {
+        if (!req.user) {
+            req.logger.fatal('Incomplete data');
+            return res.status(400).send({ status: "error", error: "Incomplete data" });
+        }
+
+        await MODEL_USER.findByIdAndUpdate(req.user._id, { last_connection: new Date() });
+
+        // Actualizar sesión del usuario (opcional)
+        req.session.user = {
+            first_name: req.user.first_name,
+            last_name: req.user.last_name,
+            email: req.user.email,
+            age: req.user.age,
+            role: req.user.role,
+            cart: req.user.cart,
+            premium: req.user.premium,
+            last_connection: new Date()
+        };
+
+        req.session.destroy((err) => {
+            req.logger.info('Session end');
+            if (err) return res.status(500).send('Error al cerrar sesión');
+            res.redirect('/login');
+        });
+    } catch (error) {
+        req.logger.error('Error during logout:', error);
+        res.status(500).send({ status: "error", error: "An error occurred during logout" });
+    }
+});
+
 
 router.get('/current', (req, res) => {
     try {

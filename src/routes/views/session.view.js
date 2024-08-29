@@ -4,7 +4,6 @@ import { isAuthenticated, isNotAuthenticated } from '../../middlewares/auth.js'
 const router = Router()
 
 router.get('/login', isNotAuthenticated, (req, res) => {
-    req.logger.http('Route GET /login')
     res.render('login')
 })
 
@@ -14,8 +13,7 @@ router.get('/register', isNotAuthenticated, (req, res) => {
 })
 
 router.get('/profile', isAuthenticated, (req, res) => {
-    req.logger.http('Route GET /profile')
-    //req.logger.info(req.session.user)
+    req.logger.info(`${req.user.first_name} ${req.user.last_name} is online`)
     res.render('profile', { user: req.session.user })
 })
 

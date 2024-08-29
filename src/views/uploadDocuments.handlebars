@@ -1,0 +1,160 @@
+<div class="container">
+    <h2 class="mt-5 mb-4 text-center">Subir Documentos</h2>
+    <!-- Formulario para cargar archivos -->
+    <form id="uploadForm" action="/api/users/{{userId}}/documents" method="post" enctype="multipart/form-data">
+        <div class="mb-4">
+            <label for="fileType" class="form-label">Tipo de archivo:</label>
+            <select id="fileType" name="fileType" class="form-select" required>
+                <option value="profile">Imagen de Perfil</option>
+                <option value="product">Imagen del Producto</option>
+                <option value="document">Documento</option>
+            </select>
+        </div>
+        <div class="mb-4">
+            <label for="files" class="form-label">Seleccionar archivos:</label>
+            <input type="file" id="files" name="files" class="form-control" multiple required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Subir Archivos</button>
+    </form>
+
+    <!-- Área de mensaje -->
+    <div id="message" class="alert alert-success mt-4" style="display: none"></div>
+
+    <h2 class="mt-5 mb-3 text-center">Documentos Subidos</h2>
+    <!-- Lista de documentos subidos -->
+    <ul class="list-group mt-3">
+        {{#each documents}}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="{{this.reference}}" target="_blank">{{this.name}}</a>
+            <button class="btn btn-danger btn-sm" onclick="deleteDocument('{{this._id}}')">Delete</button>
+        </li>
+        {{/each}}
+    </ul>
+</div>
+
+<script>
+    document.getElementById('uploadForm').addEventListener('submit', async function(event) {
+        event.preventDefault() 
+
+        const form = event.target
+        const formData = new FormData(form)
+
+        try {
+            const response = await fetch(form.action, {
+                method: form.method,
+                body: formData
+            })
+
+            if (response.ok) {
+                const messageDiv = document.getElementById('message')
+                messageDiv.style.display = 'block'
+                messageDiv.textContent = '¡Archivos subidos exitosamente!'
+
+                setTimeout(() => {
+                    window.location.reload()
+                }, 2000) 
+            } else {
+                const errorData = await response.json()
+                alert('Error al subir los archivos: ' + errorData.error)
+            }
+        } catch (error) {
+            console.error('Error al enviar el formulario:', error)
+            alert('Ocurrió un error al intentar subir los archivos. Por favor, inténtalo de nuevo.')
+        }
+    })
+
+    async function deleteDocument(documentId) {
+        if (confirm('¿Estás seguro de que deseas eliminar este documento?')) {
+            try {
+                const response = await fetch(`/api/users/{{userId}}/documents/${documentId}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    alert('Documento eliminado exitosamente.');
+                    window.location.reload();
+                } else {
+                    const errorData = await response.json();
+                    alert('Error al eliminar el documento: ' + errorData.error);
+                }
+            } catch (error) {
+                console.error('Error al eliminar el documento:', error);
+                alert('Ocurrió un error al intentar eliminar el documento. Por favor, inténtalo de nuevo.');
+            }
+        }
+    }
+</script>
+
+<style>
+    .container {
+        max-width: 800px
+        margin: 40px auto
+        padding: 30px
+        background-color: #fff
+        border: 1px solid #ddd
+        border-radius: 8px
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1)
+    }
+    .form-label {
+        font-weight: bold
+        margin-bottom: 8px
+        display: block
+    }
+    .form-select,
+    .form-control {
+        border-radius: 6px
+        border: 1px solid #ccc
+        padding: 10px
+        font-size: 16px
+    }
+    .form-control:focus,
+    .form-select:focus {
+        border-color: #007bff
+        box-shadow: 0 0 4px rgba(0, 123, 255, 0.25)
+    }
+    .btn-primary {
+        background-color: #007bff
+        border-color: #007bff
+        font-weight: bold
+        transition: background-color 0.3s, border-color 0.3s
+    }
+    .btn-primary:hover {
+        background-color: #0056b3
+        border-color: #004085
+    }
+    .list-group-item {
+        display: flex
+        justify-content: space-between
+        align-items: center
+        padding: 15px
+        font-size: 16px
+    }
+    .list-group-item a {
+        text-decoration: none
+        color: #007bff
+        transition: color 0.3s
+    }
+    .list-group-item a:hover {
+        color: #0056b3
+    }
+    .btn-danger {
+        background-color: #dc3545
+        border-color: #dc3545
+        transition: background-color 0.3s, border-color 0.3s
+    }
+    .btn-danger:hover {
+        background-color: #c82333
+        border-color: #bd2130
+    }
+    .alert {
+        padding: 15px
+        border-radius: 5px
+        font-weight: bold
+        text-align: center
+    }
+    .alert-success {
+        background-color: #d4edda
+        border-color: #c3e6cb
+        color: #155724
+    }
+</style>

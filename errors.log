@@ -3,3 +3,152 @@
 05-08-2024 15:03:53 error: Error al crear el producto: 
 06-08-2024 16:43:28 error: Producto no encontrado
 06-08-2024 16:45:52 error: Producto no encontrado
+26-08-2024 17:39:04 error: Error fetching user documents: uid is not defined
+26-08-2024 18:17:25 error: No se agregaron documentos
+26-08-2024 18:29:58 error: Error fetching user documents: Cannot read properties of undefined (reading '_id')
+26-08-2024 18:30:01 error: Error fetching user documents: Cannot read properties of undefined (reading '_id')
+26-08-2024 18:30:11 error: Error fetching user documents: Cannot read properties of undefined (reading '_id')
+26-08-2024 18:30:20 fatal: Incomplete data
+26-08-2024 18:30:37 fatal: Incomplete data
+26-08-2024 19:35:37 error: No se pudo cambiar el tipo de usuario
+26-08-2024 19:35:40 error: No se pudo cambiar el tipo de usuario
+26-08-2024 19:37:11 error: No se pudo cambiar el tipo de usuario
+26-08-2024 19:37:43 error: No se pudo cambiar el tipo de usuario
+26-08-2024 19:37:46 error: No se pudo cambiar el tipo de usuario
+26-08-2024 19:38:29 error: No se pudo cambiar el tipo de usuario
+26-08-2024 20:00:06 error: No se pudo cambiar el tipo de usuario
+26-08-2024 20:00:09 error: No se pudo cambiar el tipo de usuario
+26-08-2024 20:00:30 error: No se pudo cambiar el tipo de usuario
+26-08-2024 20:00:35 error: No se pudo cambiar el tipo de usuario
+26-08-2024 20:00:40 error: No se pudo cambiar el tipo de usuario
+26-08-2024 20:03:00 error: No se pudo cambiar el tipo de usuario
+26-08-2024 20:03:30 error: No se pudo cambiar el tipo de usuario
+26-08-2024 20:03:49 error: No se pudo cambiar el tipo de usuario
+28-08-2024 18:52:06 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+28-08-2024 19:11:21 error: Error -> (Route POST: /api/carts)
+28-08-2024 19:12:33 error: Error -> (Route POST: /api/carts)
+28-08-2024 19:17:00 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+28-08-2024 19:17:33 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+28-08-2024 19:18:42 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+28-08-2024 19:18:45 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+28-08-2024 19:19:43 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+28-08-2024 19:19:54 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+28-08-2024 19:20:32 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+28-08-2024 19:22:33 error: Error -> (Route POST: /api/carts)
+28-08-2024 19:23:11 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+28-08-2024 19:24:00 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+28-08-2024 19:32:16 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+28-08-2024 19:36:16 fatal: Error -> (Route GET: /api/carts/:cid)
+28-08-2024 19:40:02 fatal: Error -> (Route GET: /api/carts/:cid)
+28-08-2024 19:40:50 fatal: Error -> (Route GET: /api/carts/:cid)
+28-08-2024 19:43:16 error: Error en la ruta GET /api/carts/:cid -> Server error
+28-08-2024 19:47:03 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 15:09:13 error: Error -> (Route DELETE: /api/carts/delete/:cid)
+29-08-2024 15:28:06 error: Error -> (Route POST: /api/carts)
+29-08-2024 15:37:47 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 15:37:47 error: Error -> (Route DELETE: /api/carts/delete/:cid)
+29-08-2024 15:38:48 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 15:38:49 error: Error -> (Route DELETE: /api/carts/delete/:cid)
+29-08-2024 15:39:14 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 15:39:14 error: Error -> (Route DELETE: /api/carts/delete/:cid)
+29-08-2024 15:41:27 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 15:41:27 error: Error -> (Route DELETE: /api/carts/delete/:cid)
+29-08-2024 15:44:04 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 15:44:05 error: Error -> (Route DELETE: /api/carts/delete/:cid)
+29-08-2024 15:48:46 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 15:48:46 error: Error -> (Route DELETE: /api/carts/delete/:cid)
+29-08-2024 15:49:00 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 15:49:00 error: Error -> (Route DELETE: /api/carts/delete/:cid)
+29-08-2024 15:52:08 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 15:52:09 error: Error -> (Route DELETE: /api/carts/delete/:cid)
+29-08-2024 15:58:38 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 15:58:38 error: Error -> (Route DELETE: /api/carts/delete/:cid)
+29-08-2024 15:59:04 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 15:59:53 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:10:31 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:11:13 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:12:00 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:12:10 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:13:29 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:13:59 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:14:19 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:14:57 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:15:54 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:16:08 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:16:56 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:17:22 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:19:05 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:19:54 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:20:28 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:21:17 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:21:53 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:22:44 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:23:14 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:24:39 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:30:34 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:31:00 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:31:48 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:33:21 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:33:33 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:33:43 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:33:53 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:35:31 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:36:02 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:37:15 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:37:32 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:38:02 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:38:21 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:40:47 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:40:58 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:41:06 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:42:43 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 16:54:32 fatal: Incomplete data
+29-08-2024 17:04:21 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 17:54:55 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 17:56:01 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 17:59:00 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 18:00:02 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 18:00:42 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 18:01:12 fatal: Incomplete data
+29-08-2024 18:02:02 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 18:02:17 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 18:02:31 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 18:03:25 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 18:03:55 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 18:03:56 fatal: Incomplete data
+29-08-2024 18:04:21 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 18:04:22 fatal: Incomplete data
+29-08-2024 18:05:37 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 18:05:59 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 18:12:01 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 18:13:53 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 18:13:54 fatal: Incomplete data
+29-08-2024 18:19:43 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 18:25:38 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 18:26:18 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 18:26:44 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 18:27:43 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 18:31:51 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 18:32:53 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 18:35:35 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 18:38:11 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 18:38:36 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 18:39:56 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 18:40:05 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 18:44:08 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 18:57:22 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 19:09:06 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 19:09:49 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 19:11:55 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 19:14:57 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 19:15:37 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 19:18:46 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 19:18:47 fatal: Incomplete data
+29-08-2024 19:19:01 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 19:19:02 fatal: Incomplete data
+29-08-2024 19:19:25 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 19:19:26 fatal: Incomplete data
+29-08-2024 19:20:04 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 19:20:06 fatal: Incomplete data
+29-08-2024 19:20:46 fatal: Carrito no encontrado -> (Route GET: /carts/:cid)
+29-08-2024 19:20:48 fatal: Incomplete data

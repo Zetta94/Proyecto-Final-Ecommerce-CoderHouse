@@ -7,7 +7,7 @@ import {
  import { isAuthenticated}  from "../../middlewares/auth.js"
 
 const router = Router();
-//[POST] 🌐/api/product
+//[POST] 🌐/api/products
 router.post("/",isAuthenticated,createProduct)
 
 //[DELETE] 🌐/api/products/:pid

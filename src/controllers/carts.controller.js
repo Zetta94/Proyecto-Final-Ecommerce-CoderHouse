@@ -16,17 +16,25 @@ export const getCart = async (req,res)=>{
 }
 
 export const getProductofCart = async (req, res) => {
-    req.logger.http('Route GET: /api/carts/:cid')
-    const { cid } = req.params
-    const cartProducts = await manager.getProductsOfCartById(cid)
-    if(cartProducts) {
-        req.logger.info('Productos encontrados')
-        res.status(200).json({status: "success", payload : cartProducts})
-    }else {
-        req.logger.fatal('Error -> (Route GET: /api/carts/:cid)')
-        res.status(404).json({'error': 'Cart not found'})
+    try {
+        req.logger.http('Route GET: /api/carts/:cid');
+        const { cid } = req.params;
+
+        const cartProducts = await manager.getProductsOfCartById(cid);
+
+        if (cartProducts) {
+            req.logger.info('Productos encontrados');
+            res.status(200).json({ status: "success", payload: cartProducts });
+        } else {
+            req.logger.fatal('Error -> (Route GET: /api/carts/:cid)');
+            res.status(404).json({ error: 'Cart not found' });
+        }
+    } catch (error) {
+        req.logger.error(`Error en la ruta GET /api/carts/:cid -> ${error.message}`);
+        res.status(500).json({ error: `Server error: ${error.message}` });
     }
-}
+};
+
 
 export const cartAmount = async(req,res)=>{
     try{
@@ -113,3 +121,25 @@ export const removeAll = async (req, res) => {
     }
 }
 
+export const deleteCart = async (req,res) =>{
+    try{
+        req.logger.http('Route DELETE: /api/carts/delete/:cid')
+        const {cid} = req.params
+        const result = await manager.deleteACart(cid)
+        res.status(result.code).json({status : result.status})
+    }catch(error){
+        req.logger.error("Error -> (Route DELETE: /api/carts/delete/:cid)")
+        res.status(500).json({error : `Server error: ${error.message}`})
+    }
+}
+
+export const createACart = async(req,res)=>{
+    try{
+        req.logger.http('Route POST: /api/carts')
+        const cart = await manager.createCart()
+        res.status(200).json({payload : cart._id})
+    }catch(error){
+        req.logger.error("Error -> (Route POST: /api/carts)")
+        res.status(500).json({error : `Server error: ${error.message}`})
+    }
+}

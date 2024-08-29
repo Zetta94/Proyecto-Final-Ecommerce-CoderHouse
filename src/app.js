@@ -26,12 +26,6 @@ import initializePassport from './configs/passport.config.js'
 import dotenv from 'dotenv'
 dotenv.config()
 
-
-//!Arreglar handlebars para que todos los scripts esten en un mismo archivo.
-//!Generar la vista para el tipo de usuario superadmin.
-//!Generar la ruta para cambiar el rol de un usuario de user a premium y viseversa.
-//!Generar ruta para agregar y eliminar un producto.
-
 const app = express()
 
 app.use(addLogger)
@@ -100,3 +94,5 @@ const PORT = 8080
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
 })
+
+export default app

@@ -8,7 +8,7 @@ import { isAuthenticated}  from "../../middlewares/auth.js"
 
 const router = Router();
 
-// [GET] 🌐/products/productsAdminPanel
+// [GET] 🌐/products/productsPanel
 router.get('/productsPanel', allProducts)
 
 // [GET] 🌐/products/:pid

@@ -1,31 +1,24 @@
 import { Router } from "express"
 import UserManager from "../../controllers/users.controller.js"
-import {changePremium} from "../../controllers/users.controller.js"
+import {changePremium, addFile, resetPass,deleteFile} from "../../controllers/users.controller.js"
+import upload from '../../configs/multer.config.js';
 
 const manager = new UserManager()
 
 const router = Router()
 
-router.post('/restPass', async (req, res) => {
-    req.logger.http('Route POST: /api/restPass');
-    const { email, newPassword } = req.body;
-    try {
-        const updatedPass = await manager.restorePassword(email, newPassword);
-        req.logger.info("Nueva password generada");
-        res.status(200).send({ message: "Contraseña actualizada exitosamente, redirigiendo..." })
-    } catch (error) {
-        req.logger.warning(error.message);
-        if (error.message === "Usuario no encontrado") {
-            res.status(401).send({ message: "El mail no coincide con ningún mail en uso" });
-        } else if (error.message === "La nueva contraseña y la anterior no deben coincidir") {
-            res.status(403).send({ message: "Error: La contraseña nueva debe ser distinta a la anterior" });
-        } else {
-            res.status(500).send({ message: "Error al actualizar la contraseña" });
-        }
-    }
-})
+//?[POST] 🌐/api/users/restPass
+router.post('/restPass', resetPass)
 
-//[DELETE] 🌐/api/users/premium/:uid
+//?[POST] 🌐/api/users/:uid/documents
+router.post('/:uid/documents',upload.array('files'),addFile)
+
+//![DELETE] 🌐/api/users/{{userId}}/documents/${documentId}
+router.delete('/:uid/documents/:did',deleteFile)
+
+//![DELETE] 🌐/api/users/premium/:uid
 router.put('/premium/:uid',changePremium)
+
+
 
 export default router

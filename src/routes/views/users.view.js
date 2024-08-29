@@ -12,13 +12,13 @@ router.get('/createProduct',(req,res)=>{
     switch (role) {
         case "admin":
             res.render('createProduct', { user: req.session.user })
-            break;
+            break
         case "usuario":
             res.render(premium ? 'createProduct' : 'profile', { user: req.session.user })
-            break;
+            break
         default:
-            res.redirect('/profile'); 
-            break;
+            res.redirect('/profile') 
+            break
     }
 })
 
@@ -45,6 +45,17 @@ router.get('/panelAdmin',isAuthenticated, (req, res) => {
 // [GET] 🌐/users/usersAdminPanel
 router.get('/usersAdminPanel',isAuthenticated, getUsers)
  
+// [GET] 🌐/users/:uid/documents
+router.get('/addDocuments',isAuthenticated, async (req, res) => {
+    req.logger.http('Route GET /users/addDocuments')
+    try {
+        const uid = req.user._id
+        // Renderizar la plantilla y pasar los datos del usuario
+        res.render('uploadDocuments', { userId: uid, documents: req.user.documents })
+    } catch (error) {
+        req.logger.error('Error fetching user documents:', error)
+        res.status(500).send({ status: 'error', error: 'An error occurred while fetching user documents' })
+    }
+})
 
-
-export default router;
+export default router

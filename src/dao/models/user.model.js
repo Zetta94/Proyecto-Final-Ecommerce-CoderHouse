@@ -15,7 +15,14 @@ const schema = new mongoose.Schema({
     password: { type: String, max: 30 },
     cart: [{type: mongoose.Schema.Types.ObjectId,ref: 'carts'}],
     role: { type: String, max: 10 },
-    premium: {type: Boolean}
+    premium: {type: Boolean},
+    documents: [
+        {
+            name: { type: String, required: true },
+            reference: { type: String, required: true }
+        }
+    ],
+    last_connection: { type: Date }
 })
 
 const MODEL_USER = mongoose.model(collection, schema)

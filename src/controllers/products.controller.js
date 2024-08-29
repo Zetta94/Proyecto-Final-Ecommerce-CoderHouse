@@ -26,7 +26,7 @@ export const createProduct = async (req, res) => {
         const response = await manager.newProduct({ title, description, price, code, stock, category, thumbnail }, email);
         
         req.logger.info("Producto creado con éxito: ", response);
-        res.status(200).json({ status: "success" });
+        res.status(200).json({ status: "success" , payload : response});
     } catch (error) {
         req.logger.error("Error al crear el producto: ", error.message);
         res.status(500).json({ status: "error", message: error.message });

@@ -41,15 +41,18 @@ export default class CartManager{
             console.log(error)
         }
     }
+
     //Funcion que trae un carrito por id
     async getProductsOfCartById(id) {
         try {
             const cart = await cartModel.findById(id).populate('products.product')
+            cart ? console.log(cart.products) : "No hay productos"
             return cart ? cart.products : false
         } catch (error) {
-            console.log(error)
+            throw new Error('Server error')
         }
     }
+
     //Funcion que agrega un nuevo producto a un carrito
     async addProductToCart(cid, pid) {
         try {
@@ -130,6 +133,20 @@ export default class CartManager{
         }
     }
 
+    async createCart (){
+        try{
+            const newCart = {
+                user: "66b0233f22776e892fd8e8cc",
+                products: []
+            }
+            const carts = await cartModel.create(newCart)
+            return carts
+        }catch(error){
+            console.log("Error en createCart", error)
+            throw error
+        }
+    }
+
     async getCartByUser(userId) {
         try {
           const carts = await cartModel.find({ user: userId }).populate('user')
@@ -139,4 +156,14 @@ export default class CartManager{
           throw error 
         }
       }
+
+    async deleteACart(cid){
+        try{
+            const result = await cartModel.deleteOne({ _id: cid })
+            return { code: 200, status: 'Cart deleted' }
+        }catch(error){
+            console.log("Error en deleteACart", error)
+            throw error 
+        }
+    }
 }
