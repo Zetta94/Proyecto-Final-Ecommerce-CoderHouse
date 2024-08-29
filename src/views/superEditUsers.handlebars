@@ -56,9 +56,10 @@
 
 <script>
     function togglePremium(uid, currentStatus) {
-        const newStatus = !currentStatus
+        const newStatus = !currentStatus;
 
         const url = `http://localhost:8080/api/users/premium/${uid}`;
+
         // Realiza la actualización en el backend
         fetch(url, {
             method: 'PUT',
@@ -69,14 +70,16 @@
         })
         .then(response => response.json())
         .then(data => {
-            if (newStatus) {
-                alert(`El usuario ahora es PREMIUM.`)
-                window.location.reload()
+            if (data.status === "success") {
+                if (newStatus) {
+                    alert(`El usuario ahora es PREMIUM.`);
+                } else {
+                    alert(`El usuario ha dejado de ser PREMIUM.`);
+                }
+                window.location.reload();
             } else {
-                alert(`El usuario ha dejado de ser PREMIUM.`)
-                window.location.reload()
+                alert(`No se pudo cambiar el estado de premium ya que no posee la documentación completamente cargada`);
             }
-
         })
         .catch(error => {
             console.error('Error al cambiar el estado de premium:', error);
