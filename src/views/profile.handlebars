@@ -1,105 +1,110 @@
-<div class="container">
-    <!--Navbar-->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary ">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Ecommerce</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                <a class="nav-link" href="http://localhost:8080/products">PRODUCTS</a>
-                </li>
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">            
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="http://localhost:8080/carts/{{user.cart}}">CART</a>
-                    </li>
-                </ul>
-            </ul>
+<div class="bd">
+    <div class="wrapper">
+            <h1>{{user.first_name}} {{user.last_name}}</h1>
+            <div class="data-box">
+                <a>Email</a>
+                <p>{{user.email}}</p>
+                <a>Age</a>
+                <p>{{user.age}}</p>
+                <a>Rol</a>
+                <p>{{user.role}}</p>
+                <a>Cart ID</a>
+                <p>{{user.cart}}</p>
+                <a>User type</a>
+                {{#if user.premium}}
+                    <div>
+                        <p>Premium user
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16"></svg>
+                        <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
+                        <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
+                        </svg>
+                        </p>
+                        
+                    </div>
+                {{else}}
+                    <div>
+                        <p>No premium user
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ban" viewBox="0 0 16 16"></svg>
+                        <path d="M15 8a6.97 6.97 0 0 0-1.71-4.584l-9.874 9.875A7 7 0 0 0 15 8M2.71 12.584l9.874-9.875a7 7 0 0 0-9.874 9.874ZM16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0"/>
+                        </svg>
+                        </p>
+                    </div>
+                {{/if}}
             </div>
-        </div>
-    </nav>
-    <div class="profile-container">
-        <h2>Profile {{user.first_name}} {{user.last_name}}</h2>
-        <a href="/users/addDocuments" class="btn btn-primary">Add Files</a>
-        <p><strong>Email:</strong> {{user.email}}</p>
-        <p><strong>Age:</strong> {{user.age}}</p>
-        <p><strong>Rol:</strong> {{user.role}}</p>
-        <p><strong>Cart ID:</strong> {{user.cart}}</p>
-        {{#if user.premium}}
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
-                <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
-                <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
-                </svg>
-                <p><strong>USUARIO PREMIUM</strong></p>
-            </div>
-        {{else}}
-            <div >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ban" viewBox="0 0 16 16">
-                <path d="M15 8a6.97 6.97 0 0 0-1.71-4.584l-9.874 9.875A7 7 0 0 0 15 8M2.71 12.584l9.874-9.875a7 7 0 0 0-9.874 9.874ZM16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0"/>
-                </svg>
-                <p><strong>USUARIO NO PREMIUM</strong></p>
-            </div>
-        {{/if}}
-        <form action="/api/sessions/logout" method="POST">
-            <button type="submit" class="primary-button">Logout</button>
-        </form>
+        
+
+            <a class="btn" href="/users/addDocuments">Add Files</a>
+            <form action="/api/sessions/logout" method="POST">
+                <button type="submit" class="btn">Logout</button>
+            </form>
+
+        
     </div>
-    
 </div>
 
-
- <style>
-    .container {
-        max-width: 1000px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: #f9f9f9;
-        border: 1px solid #ccc;
-        border-radius: 5px;
+<style>
+    .bd {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-image: url("./images/carritowebp.jpg");
+        background-size: cover;
+        background-position: center;
     }
 
-    .profile-container {
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: #ffffff;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    .wrapper {
+        width: 420px;
+        background: transparent;
+        border: 2px solid rgba(255, 255, 255, .2);
+        backdrop-filter: blur(20px);
+        box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+        color: #fff;
+        border-radius: 10px;
+        padding: 30px 60px;
+    }
+
+    .wrapper h1 {
+        font-size: 36px;
         text-align: center;
     }
 
-    .profile-container h2 {
-        margin-bottom: 20px;
-        color: #333;
+    .wrapper .data-box {
+        position: relative;
+        width: 100%;
+        height: auto;
+        margin: 30px 0;
     }
 
-    .profile-container p {
-        margin: 10px 0;
-        font-size: 16px;
-        color: #555;
-    }
-
-    .profile-container p strong {
-        color: #333;
-    }
-
-    .primary-button {
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: #fff;
+    .data-box p {
+        width: 100%;
+        background: transparent;
         border: none;
-        border-radius: 5px;
+        outline: none;
+        border: 0.5px solid rgba(255, 255, 255, .2);
+        border-radius: 40px;
+        text-align: center;
+        color: #fff;
+        padding: 10px;
+        margin-bottom: 5px;
+        font-weight: 600;
+    }
+
+    .wrapper .btn {
+        width: 100%;
+        background: #fff;
+        border: none;
+        outline: none;
+        border-radius: 40px;
+        box-shadow: 0 0 2px rgba(0, 0, 0, .1);
         cursor: pointer;
         font-size: 16px;
-        text-transform: uppercase;
+        color: #333;
+        font-weight: 600;
+        text-align: center;
+        display: block;
+        padding: 10px;
+        text-decoration: none;
+        margin-bottom: 10px;
     }
-
-    .primary-button:hover {
-        background-color: #0056b3;
-    }
-    
 </style>
