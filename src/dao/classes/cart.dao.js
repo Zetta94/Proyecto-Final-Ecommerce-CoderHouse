@@ -1,4 +1,5 @@
 import cartModel from "../models/cart.model.js"
+import mongoose from 'mongoose'
 
 export default class CartManager{
     //Funcion que crea un nuevo carrito
@@ -25,7 +26,7 @@ export default class CartManager{
             }
             let total = 0
             cart.products.forEach(item => {
-                total += item.product.price * item.quantity;
+                total += item.product.price * item.quantity
             })
             return total
         } catch (error) {
@@ -45,26 +46,26 @@ export default class CartManager{
     //Funcion que trae un carrito por id
     async getProductsOfCartById(id) {
         try {
-            if (!mongoose.Types.ObjectId.isValid(id)) {
-                console.log('Invalid Cart ID:', id);
-                return { status: 400, message: 'Invalid Cart ID' };
+            if (!id) {
+                console.log('No Cart ID provided')
+                return { status: 400, message: 'No Cart ID provided' }
             }
-    
-            const cart = await cartModel.findById(id).populate('products.product');
-    
+            
+            const cart = await cartModel.findById(id).populate('products.product')
+
             if (!cart) {
-                console.log('Cart not found with ID:', id);
-                return { status: 404, message: 'Cart not found' };
+                console.log('Cart not found with ID:', id)
+                return { status: 404, message: 'Cart not found' }
             }
     
-            console.log('Cart products:', cart.products);
-            return { status: 200, products: cart.products };
+            return cart.products 
     
         } catch (error) {
-            console.error('Error fetching cart products:', error);
-            return { status: 500, message: 'Internal Server Error' };  
+            console.error('Error fetching cart products:', error)
+            return { status: 500, message: 'Internal Server Error' }  
         }
     }
+    
     
 
     //Funcion que agrega un nuevo producto a un carrito
