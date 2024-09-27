@@ -4,6 +4,7 @@
 
 - [Descripción](#descripción)
 - [Alojamiento](#Alojamiento)
+- [Estructura](#Estructura)
 - [Instalación y Ejecución](#instalación-y-ejecución)
   - [Backend](#backend)
 - [Tecnologías](#Tecnologías)
@@ -21,6 +22,99 @@ La aplicación permite realizar operaciones CRUD sobre una entidad principal, en
 - **Interfaz de Usuario:** Desarrollo con Handlebars, CSS, HTML y Bootstrap proporcionando una experiencia de usuario interactiva.
 - **Paginación:** Implementada para manejar grandes volúmenes de datos.
 - **API de Datos:** Consumo de datos almacenados en MongoDB.
+
+### Estructura
+
+```
+├── test/                              # Pruebas de la aplicación
+│    ├── carts.spec.js                 # Pruebas para el controlador de carritos
+│    ├── products.spec.js              # Pruebas para el controlador de productos
+│    └── sessions.spec.js              # Pruebas para el controlador de sesiones
+│
+├── uploads/                           # Archivos subidos
+│    ├── documents/                    # Documentos subidos
+│    ├── products/                     # Imágenes de productos subidas
+│    └── profiles/                     # Imágenes de perfiles subidas
+│
+└── src/                               # Código fuente de la aplicación
+|    ├── app.js                        # Archivo principal de la aplicación
+|    |
+|    ├── logger.js                     # Configuración del logger
+|    │
+|    ├── utils.js                      # Configuraciones secundarias
+|    |
+|    ├── configs/                      # Configuraciones específicas
+|    |   ├── notifications           
+|    │   │   ├── nodemailer.config.js  # Configuración de Nodemailer
+|    │   ├── database.js               # Configuración de la base de datos
+|    │   ├── mercadopago.config.js     # Configuración de Mercado Pago
+|    │   ├── mocha.config.js           # Configuración de Mocha
+|    │   └── multer.config.js          # Configuración de Multer
+|    │
+|    ├── controllers/                  # Controladores de la aplicación
+|    │   ├── carts.controller.js       # Controlador de carritos
+|    │   ├── products.controller.js    # Controlador de productos
+|    │   ├── tickets.controller.js     # Controlador de tickets
+|    │   └── users.controller.js       # Controlador de usuarios
+|    │
+|    ├── dao/                          # Data Access Objects (DAO)
+|    │   ├── classes/                  # Clases DAO
+|    │   │   ├── cart.dao.js           # DAO de carritos
+|    │   │   ├── product.dao.js        # DAO de productos
+|    │   │   ├── session.dao.js        # DAO de sesiones
+|    │   │   ├── ticket.dao.js         # DAO de tickets
+|    │   │   └── user.dao.js           # DAO de usuarios
+|    │   │
+|    │   └── models/                   # Modelos de datos
+|    │       ├── cart.model.js         # Modelo de carritos
+|    │       ├── product.model.js      # Modelo de productos
+|    │       ├── ticket.model.js       # Modelo de tickets
+|    │       └── user.model.js         # Modelo de usuarios
+|    │
+|    ├── docs/                         # Documentación de la API
+|    │   ├── Carts/                    # Documentación de carritos
+|    │   │   └── Carts.yaml            # Especificaciones de la API de carritos
+|    │   └── Products/                 # Documentación de productos
+|    │       └── Products.yaml         # Especificaciones de la API de productos
+|    │
+|    │
+|    ├── middlewares/                  # Middlewares de la aplicación
+|    │   └── auth.js                   # Middleware de autenticación
+|    │
+|    └── public/                       # Archivos públicos
+|    |   └── images/                   # Imágenes públicas
+|    ├── routes/                       # Rutas
+|    │   ├── index.router.js           # Especificaciones de las rutas
+|    │   ├── routes/                   # Rutas API
+|    │   │   ├── carts.api.js          # Ruta API de carritos
+|    │   │   ├── mercadopago.api.js    # Ruta API de mercadopago
+|    │   │   ├── products.api.js       # Ruta API de productos
+|    │   │   ├── sessions.api.js       # Ruta API de sesiones
+|    │   │   ├── tickets.api.js        # Ruta API de tickets
+|    │   │   └── users.api.js          # Ruta API de usuarios
+|    │   │
+|    │   └── views/                    # Rutas de vistas
+|    │   │   ├── carts.view.js         # Ruta de vistas de carritos
+|    │   │   ├── mercadopago.view.js   # Ruta de vistas de mercadopago
+|    │   │   ├── products.view.js      # Ruta de vistas de productos
+|    │   │   ├── sessions.view.js      # Ruta de vistas de sesiones
+|    │   │   ├── tickets.view.js       # Ruta de vistas de tickets
+|    │   │   └── users.view.js         # Ruta de vistas de usuarios
+|    │
+|    ├── views/                        # Archivos handlebars 
+|    │   ├── layouts/                  # Carpeta contenedora de main
+|    │   │   ├── main.handlebars       # Archivo main de handlebars
+|    │   ├── ...                       
+|    │   ├── [varios archivos hbs]     # Otros archivos handlebars relacionados con las vistas   
+|    │   ├── ...                       
+├── .env                               # Archivo de configuración de entorno
+├── config/                            # Archivos de configuración
+│
+├── errors.log                         # Archivo de registro de errores
+├── package-lock.json                  # Lockfile de npm
+├── package.json                       # Archivo de configuración de npm
+│
+```
 
 ## Alojamiento
 
