@@ -142,6 +142,6 @@ La aplicación permite realizar operaciones CRUD sobre una entidad principal, en
 - **Estilos**: Se utilizó **Handlebars**,**CSS**,**HTML** y **Bootstrap** para el estilizado de la aplicación.
 - **Filtrado**: Se añadió un sistema de filtrado para mejorar la navegación y accesibilidad de los datos.
 - **Notificaciones**: Se implemento ` Nodemailer ` para enviar mails a los usuarios en caso de cambios en su rol o productos.
-- **Mercadopago**: Se implemento ` Mercadopago API ` para realizar un pago de un solo producto a travez de la ruta https://proyecto-final-ecommerce-coderhouse.onrender.com/mercadopago.
+- **Mercadopago**: Se implemento ` Mercadopago API ` para realizar un pago de un solo producto a través de la ruta https://proyecto-final-ecommerce-coderhouse.onrender.com/mercadopago.
 - **Almacenamiento de nuevos datos**: Se implemento ` Multer ` para poder subir imagenes y archivos para que cada usuario pueda cargar sus datos.
 - **Test**: Se imeplemento ` Supertest ` y ` Chai ` para poder generar test sobre algunas rutas.
