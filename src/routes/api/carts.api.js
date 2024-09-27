@@ -21,7 +21,7 @@ router.get('/:cid', getProductofCart )
 // [GET] 🌐/api/carts/:cid/total
 router.get('/:cid/total', cartAmount)
 
-// ?[POST] 🌐/api/carts/new carro verdadero 66b0233f22776e892fd8e8ce
+// ?[POST] 🌐/api/carts/new 
 router.post('/',createACart)
 
 //! RUTA CON ERROR, ARREGLAR
@@ -45,8 +45,6 @@ router.delete('/:cid', removeAll)
 
 //![DELETE] /api/carts/delete/:cid
 router.delete('/delete/:cid',deleteCart)
-//66abdd7c3c256c2f0061cae0
-//66b02290e2d128cb072de5d4
-//66b0233f22776e892fd8e8cc
+
 
 export default router

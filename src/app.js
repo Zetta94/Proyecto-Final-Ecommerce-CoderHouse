@@ -13,6 +13,8 @@ import swaggerJsDoc from 'swagger-jsdoc'
 import SwaggerUiExpress from 'swagger-ui-express'
 //MongoStore
 import MongoStore from 'connect-mongo'
+//Cors
+import cors from "cors"
 //Mongoose
 import mongoose from './configs/database.js'
 //Rutas
@@ -22,11 +24,17 @@ import { addLogger } from './logger.js'
 //Passport
 import passport from 'passport'
 import initializePassport from './configs/passport.config.js'
+//Mercadopago
+import MercadoPagoConfig from 'mercadopago'
 //dotenv
 import dotenv from 'dotenv'
 dotenv.config()
 
 const app = express()
+
+
+//Cors
+app.use(cors())
 
 app.use(addLogger)
 

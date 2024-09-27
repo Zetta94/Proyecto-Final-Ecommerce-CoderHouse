@@ -9,10 +9,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-                <a class="nav-link" href="http://localhost:8080/profile">PROFILE</a>
+                <a class="nav-link" href="/profile">PROFILE</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="http://localhost:8080/products">PRODUCTS</a>
+            <a class="nav-link" href="/products">PRODUCTS</a>
             </li>
         </ul>
         </div>
@@ -59,7 +59,7 @@
                     </h5>
                 </div>
 
-                <button class="btn" data-cartid="{{../cid}}" data-productid="{{product._id}}">
+                <button class="btn deleteProductButton" data-cartid="{{../cid}}" data-productid="{{product._id}}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                         <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
                         <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
@@ -77,7 +77,7 @@
         const finishPurchaseBtn = document.getElementById('finishPurchaseBtn')
 
         finishPurchaseBtn.addEventListener('click', function() {
-            window.location.href = 'http://localhost:8080/sendTicket'
+            window.location.href = '/sendTicket'
         });
     });
 
@@ -90,7 +90,7 @@
     });
 
     async function fetchCartTotal(cartId) {
-        const url = `http://localhost:8080/api/carts/${cartId}/total`
+        const url = `/api/carts/${cartId}/total`
         try {
             const response = await fetch(url)
             if (response.ok) {
@@ -108,8 +108,7 @@
     }
 
     async function addToCart(pid,cid,price) {
-        console.log("entreeee")
-        const url = `http://localhost:8080/api/carts/${cid}/product/${pid}`
+        const url = `/api/carts/${cid}/product/${pid}`
         try {
             const response = await fetch(url, {
                 method: 'POST'
@@ -127,7 +126,7 @@
     }
 
     async function deleteOne(pid, quant,cid,price) {
-        const url = `http://localhost:8080/api/carts/${cid}/product/${pid}`;
+        const url = `/api/carts/${cid}/product/${pid}`;
         const data = { quantity: parseInt(quant)-1 }
 
         if (!/^[0-9a-fA-F]{24}$/.test(pid)) {
@@ -166,7 +165,7 @@
                 console.log('cartId:', cartId) 
                 console.log('productId:', productId)
 
-                if (confirm('¿Estás seguro de que quieres eliminar este producto del carrito?')) {
+                if (confirm('Are you sure you want to remove this product from your cart?')) {
                     fetch(`/api/carts/${cartId}/product/${productId}`, {
                         method: 'DELETE'
                     })

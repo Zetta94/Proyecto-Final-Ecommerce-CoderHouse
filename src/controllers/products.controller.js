@@ -50,7 +50,7 @@ export const deleteProduct = async (req,res)=>{
     try{
         const {pid} = req.params
         const response = await manager.deleteAProduct(pid)
-        res.status(200).json({ status: "success" });
+        res.status(response.status).json({ message: response.message });
     }catch(error){
         req.logger.error("Producto no encontrado")
         res.status(500).json({ status: "error", message: error.message })

@@ -1,9 +1,11 @@
 <div class="container">
-    <h1>¡Gracias por su compra {{user.first_name}}!</h1>
-    <h2>El ticket de su compra ha sido generado.</h2>
-    <button id="sendTicketBtn">Send ticket by email</button>
+    <h1>¡Thank you for your purchase {{user.first_name}}!</h1>
+    <h2>The receipt for your purchase has been generated.</h2>
+    <h2>To receive the ticket in your email please click on the following button</h2>
+    <button id="sendTicketBtn">Send Ticket</button>
     <form action="/api/sessions/logout" method="POST">
-        <button type="submit">Back to shopping</button>
+        <h1>To make another purchase please log in again</h1>
+        <button type="submit">Login</button>
     </form>
 </div>
 
@@ -26,7 +28,7 @@
                     code: uniqueNumber
                 }
 
-                const response = await fetch('http://localhost:8080/ticket/generate', {
+                const response = await fetch('/ticket/generate', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -49,7 +51,7 @@
     });
 
     async function fetchCartTotal(cartId) {
-        const url = `http://localhost:8080/api/carts/${cartId}/total`
+        const url = `/api/carts/${cartId}/total`
         try {
             const response = await fetch(url)
             if (response.ok) {

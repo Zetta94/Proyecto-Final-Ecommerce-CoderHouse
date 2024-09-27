@@ -45,13 +45,27 @@ export default class CartManager{
     //Funcion que trae un carrito por id
     async getProductsOfCartById(id) {
         try {
-            const cart = await cartModel.findById(id).populate('products.product')
-            cart ? console.log(cart.products) : "No hay productos"
-            return cart ? cart.products : false
+            if (!mongoose.Types.ObjectId.isValid(id)) {
+                console.log('Invalid Cart ID:', id);
+                return { status: 400, message: 'Invalid Cart ID' };
+            }
+    
+            const cart = await cartModel.findById(id).populate('products.product');
+    
+            if (!cart) {
+                console.log('Cart not found with ID:', id);
+                return { status: 404, message: 'Cart not found' };
+            }
+    
+            console.log('Cart products:', cart.products);
+            return { status: 200, products: cart.products };
+    
         } catch (error) {
-            throw new Error('Server error')
+            console.error('Error fetching cart products:', error);
+            return { status: 500, message: 'Internal Server Error' };  
         }
     }
+    
 
     //Funcion que agrega un nuevo producto a un carrito
     async addProductToCart(cid, pid) {

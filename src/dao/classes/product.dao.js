@@ -1,4 +1,6 @@
 import productModel from "../models/product.model.js"
+import sendMailTo from "../../configs/notifications/nodemailer.config.js"
+import cartModel from "../models/cart.model.js"
 
 export default class ProductManager{
     async getProduct(pid) {
@@ -48,11 +50,29 @@ export default class ProductManager{
     async deleteAProduct(pid){
         try{
             const id = pid
-            const result = await productModel.deleteOne({ _id: id })
-            if (result.deletedCount === true) {
-                return { code: 200, status: 'Product deleted' }
+            const product = await productModel.findById(pid);
+            if(!product) {return { status: 404, message: 'Product not found' }}
+            const productTitle = product.title
+            let existsCreator = false
+            if(product.owner){
+                existsCreator = true
             }
-            return { code: 404, status: 'Product not found' }
+
+            await cartModel.updateMany(
+                { products: { $elemMatch: { product: pid } } }, 
+                { $pull: { products: { product: pid } } } 
+            );
+
+            const result = await productModel.deleteOne({ _id: id })
+            if (result.deletedCount === 1) {
+                if(existsCreator && product.owner !== "admin"){
+                    const purchaser = product.owner
+                    const mailSubject = `Product deleted`
+                    const mailText = `Your product ${productTitle} was deleted for the Admin`
+                    await sendMailTo(purchaser, mailSubject, mailText)
+                }
+                return { status: 200, message: 'Product deleted' }
+            }
         }catch(error){
             throw error
         }

@@ -1,4 +1,5 @@
 import userModel from "../models/user.model.js"
+import sendMailTo from "../../configs/notifications/nodemailer.config.js"
 import fs from 'fs'
 
 export default class UsersManager{
@@ -27,7 +28,7 @@ export default class UsersManager{
             throw new Error('User has not uploaded all required documents')
         }
     }
-
+    
     async getAll(){
         try {
             const users = await userModel.find({ role: { $ne: 'admin' } })
@@ -91,4 +92,37 @@ export default class UsersManager{
             return { status: 500, message: 'Error interno del servidor' }
         }
     }
+
+    async deleteAUser(uid) {
+        try {
+            const user = await userModel.findById(uid);
+            if (!user) {
+                return { status: 404, message: 'User not found' };
+            }
+            const mailUser = user.email
+            const now = new Date();
+            const lastConnection = new Date(user.last_connection);
+            const twoDays = 2 * 24 * 60 * 60 * 1000; 
+    
+            if (now - lastConnection > twoDays) {
+                const result = await userModel.deleteOne({ _id: uid });
+                if (result.deletedCount > 0) {
+                    const purchaser = mailUser
+                    const mailSubject = 'Your account was deleted'
+                    const mailText = `The admin deleted his account because he had no activity in the last 2 days or more.`
+                    await sendMailTo(purchaser, mailSubject, mailText)
+                    return { status: 200, message: 'User deleted' };
+                } else {
+                    return { status: 404, message: "User not found" };
+                }
+            } else {
+                return { status: 403, message: 'The user cannot be deleted because they do not have inactivity of 2 or more days' };
+            }
+        } catch (error) {
+            console.error('Error al eliminar usuario:', error);
+            return { status: 500, message: 'Error interno del servidor' };
+        }
+    }
+    
+    
 }

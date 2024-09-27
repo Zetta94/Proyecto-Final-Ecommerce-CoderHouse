@@ -81,9 +81,9 @@
 
             backButton.addEventListener('click', () => {
                 if (userRole === 'admin') {
-                    window.location.href = 'http://localhost:8080/products/productsPanel';
+                    window.location.href = '/products/productsPanel';
                 } else if (userRole === 'usuario') {
-                    window.location.href = 'http://localhost:8080/products';
+                    window.location.href = '/products';
                 } else {
                     console.error('Rol de usuario no válido');
                 }

@@ -1,0 +1,53 @@
+
+<div class="card-product">
+    <div class="card">
+        <img src="" alt="">
+        <h3 class="name"> MercadoPago Prueba 1</h3>
+        <p class="price"> $ 1</p>
+        <button id="check-btn">Comprar</button>
+        <div id="wallet_container"></div>
+    </div>
+</div>
+
+
+<script>
+    const mp = new MercadoPago('{{mp_key}}',{
+        local:"es-AR"
+    })
+
+    try{
+        document.getElementById("check-btn").addEventListener("click", async()=>{
+            const orderData = {
+                title:document.querySelector(".name").innerText,
+                quantity:1,
+                price:1,
+            }
+            const response = await fetch("/api/mercadopago",{
+                method:"POST",
+                headers:{
+                    "Content-Type" : "application/json"
+                },
+                body: JSON.stringify(orderData)
+            })
+            const preference = await response.json()
+            createCheckoutButton(preference.id)
+        })
+    }catch(error){
+        alert("Error al realizar el pago")
+    }
+
+    const createCheckoutButton = (preferenceId) => {
+        if(window.checkoutButton){
+            window.checkoutButton.unmount()
+        }
+        const bricksBuilder = mp.bricks()
+        const renderComponent = async () =>{
+            mp.bricks().create("wallet", "wallet_container", {
+            initialization: {
+                preferenceId: preferenceId,
+            },
+            });
+        }
+        renderComponent()
+    }
+</script>
