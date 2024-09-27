@@ -6,11 +6,10 @@
 - [Alojamiento](#Alojamiento)
 - [Estructura](#Estructura)
 - [Instalación y Ejecución](#instalación-y-ejecución)
-  - [Backend](#backend)
 - [Tecnologías](#Tecnologías)
 - [Requerimientos](#Requerimientos)
-- [Plus](Plus)
-  
+- [Plus](#Plus)
+
 ## Descripción
 
 Este proyecto es una aplicación web desarrollada en **Javascript** utilizando **Handlebars** como plantillas y **Express** con **MongoDB**. 
